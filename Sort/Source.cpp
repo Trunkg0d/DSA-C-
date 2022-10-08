@@ -100,7 +100,7 @@ int partition(int a[], int start, int end) {
 		while (i<pivotIndex && j>pivotIndex) {
 			swap(a[i], a[j]);
 			i++;
-			j++;
+			j--;
 		}
 	}
 	return pivotIndex;
@@ -129,11 +129,12 @@ void Heapify(int a[], int n, int i) {
 	}
 	if (parent != i) {
 		swap(a[parent], a[i]);
+		Heapify(a, n, parent);
 	}
 }
 
 void HeapSort(int a[], int n) {
-	for (int i = 0; i < n / 2 - 1; i++) {
+	for (int i = n / 2 - 1; i >= 0; i--) {
 		Heapify(a, n, i);
 	}
 	for (int i = n - 1; i > 0; i--) {
