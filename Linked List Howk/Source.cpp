@@ -7,8 +7,8 @@ struct NODE {
 };
 
 struct LIST {
-	NODE* p_head;
-	NODE* p_tail;
+	NODE* p_head = NULL;
+	NODE* p_tail = NULL;
 };
 
 // LIST constructor method: create a null list
@@ -141,8 +141,14 @@ void removePos(LIST* list, int pos) {
 }
 
 void removeAll(LIST* list) {
+	NODE* root = list->p_head;
+	NODE* next = new NODE;
+	while (root != NULL) {
+		next = root->p_next;
+		free(root);
+		root = next;
+	}
 	list->p_head = NULL;
-	list->p_tail = NULL;
 }
 
 int countElements(LIST* list) {
@@ -155,6 +161,63 @@ int countElements(LIST* list) {
 	return count;
 }
 
+LIST* reverse(LIST* list) {
+	NODE* root = list->p_head;
+	LIST* l = new LIST;
+	l = initList();
+	while (root != NULL) {
+		addHead(l, root->data);
+		root = root->p_next;
+	}
+	return l;
+}
+
+void removeDuplicate(LIST* list) {
+	NODE* root = list->p_head;
+	NODE* temp_root;
+	while (root != NULL && root->p_next!=NULL) {
+		temp_root = root;
+		while (temp_root->p_next != NULL) {
+			if (temp_root->p_next->data == root->data) {
+				NODE* dup = temp_root->p_next;
+				temp_root->p_next = temp_root->p_next->p_next;
+				free(dup);
+			}
+			else {
+				temp_root = temp_root->p_next;
+			}
+		}
+		root = root->p_next;
+	}
+}
+
+LIST* removeKey(LIST* list, int key) {
+	NODE* root = list->p_head;
+	LIST* new_list = new LIST;
+	new_list = initList();
+	while (root != NULL) {
+		if (root->data != key) {
+			addTail(new_list, root->data);
+		}
+		root = root->p_next;
+	}
+	removeAll(list);
+	return new_list;
+}
+
+//void removeKey(LIST* list, int key) {
+//	NODE* root = list->p_head;
+//	LIST* new_list = new LIST;
+//	new_list = initList();
+//	while (root != NULL) {
+//		if (root->data != key) {
+//			addTail(new_list, root->data);
+//		}
+//		root = root->p_next;
+//	}
+//	removeAll(list);
+//	list = new_list;
+//}
 
 void printList(NODE* root) {
 	while (root != NULL) {
@@ -178,6 +241,9 @@ int main() {
 	cout << "key = 6: Remove Pos" << endl;
 	cout << "key = 7: Remove All" << endl;
 	cout << "key = 8: Count element in list" << endl;
+	cout << "key = 9: Reverse list" << endl;
+	cout << "key = 10: Remove Duplicate" << endl;
+	cout << "key = 11: Remove Key" << endl;
 	cin >> key;
 	while (key != 0) {
 		if (key == 1) {
@@ -226,6 +292,20 @@ int main() {
 		if (key == 8) {
 			cout << "Count: " << countElements(list) << endl;
 		}
+		if (key == 9) {
+			LIST* r = new LIST;
+			r = initList();
+			r = reverse(list);
+			printList(r->p_head);
+		}
+		if (key == 10) {
+			removeDuplicate(list);
+			printList(list->p_head);
+		}
+		if (key == 11) {
+			list = removeKey(list, 2);
+			printList(list->p_head);
+		}
 		cout << "Input key: " << endl;
 		cout << "key = 1: Add a node to the head of the list" << endl;
 		cout << "key = 2: Add a node to the tail of the list" << endl;
@@ -235,6 +315,9 @@ int main() {
 		cout << "key = 6: Remove Pos" << endl;
 		cout << "key = 7: Remove All" << endl;
 		cout << "key = 8: Count element in list" << endl;
+		cout << "key = 9: Reverse list" << endl;
+		cout << "key = 10: Remove Duplicate" << endl;
+		cout << "key = 11: Remove Key" << endl;
 		cin >> key;
 		if (key == 0) {
 			break;

@@ -23,7 +23,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sort", "Sort\Sort.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List", "Linked List\Linked List.vcxproj", "{406180B0-A5DD-4B00-9989-94E457E5BED8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List Howk", "Linked List Howk\Linked List Howk.vcxproj", "{1C02FF66-E543-4502-B9B8-F1E47DC0A18C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List Self Study", "Linked List Howk\Linked List Howk.vcxproj", "{1C02FF66-E543-4502-B9B8-F1E47DC0A18C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pointer", "Pointer\Pointer.vcxproj", "{575FAA1E-C085-4DDC-95FB-6DD21ED85519}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Linked List Theory class", "Linked List Theory class\Linked List Theory class.vcxproj", "{F738867C-3D00-4AFC-9C16-41DC05293E47}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Double Linked List", "Double Linked List\Double Linked List.vcxproj", "{20D5E003-9D72-4159-A852-34F27F81F3BA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{DDC321E4-96E2-4B06-917A-AC721667F288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +129,38 @@ Global
 		{1C02FF66-E543-4502-B9B8-F1E47DC0A18C}.Release|x64.Build.0 = Release|x64
 		{1C02FF66-E543-4502-B9B8-F1E47DC0A18C}.Release|x86.ActiveCfg = Release|Win32
 		{1C02FF66-E543-4502-B9B8-F1E47DC0A18C}.Release|x86.Build.0 = Release|Win32
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Debug|x64.ActiveCfg = Debug|x64
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Debug|x64.Build.0 = Debug|x64
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Debug|x86.ActiveCfg = Debug|Win32
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Debug|x86.Build.0 = Debug|Win32
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Release|x64.ActiveCfg = Release|x64
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Release|x64.Build.0 = Release|x64
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Release|x86.ActiveCfg = Release|Win32
+		{575FAA1E-C085-4DDC-95FB-6DD21ED85519}.Release|x86.Build.0 = Release|Win32
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Debug|x64.ActiveCfg = Debug|x64
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Debug|x64.Build.0 = Debug|x64
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Debug|x86.ActiveCfg = Debug|Win32
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Debug|x86.Build.0 = Debug|Win32
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Release|x64.ActiveCfg = Release|x64
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Release|x64.Build.0 = Release|x64
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Release|x86.ActiveCfg = Release|Win32
+		{F738867C-3D00-4AFC-9C16-41DC05293E47}.Release|x86.Build.0 = Release|Win32
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Debug|x64.ActiveCfg = Debug|x64
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Debug|x64.Build.0 = Debug|x64
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Debug|x86.ActiveCfg = Debug|Win32
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Debug|x86.Build.0 = Debug|Win32
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Release|x64.ActiveCfg = Release|x64
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Release|x64.Build.0 = Release|x64
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Release|x86.ActiveCfg = Release|Win32
+		{20D5E003-9D72-4159-A852-34F27F81F3BA}.Release|x86.Build.0 = Release|Win32
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Debug|x64.ActiveCfg = Debug|x64
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Debug|x64.Build.0 = Debug|x64
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Debug|x86.ActiveCfg = Debug|Win32
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Debug|x86.Build.0 = Debug|Win32
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Release|x64.ActiveCfg = Release|x64
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Release|x64.Build.0 = Release|x64
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Release|x86.ActiveCfg = Release|Win32
+		{DDC321E4-96E2-4B06-917A-AC721667F288}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
