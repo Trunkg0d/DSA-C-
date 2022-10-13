@@ -191,21 +191,7 @@ void removeDuplicate(LIST* list) {
 	}
 }
 
-LIST* removeKey(LIST* list, int key) {
-	NODE* root = list->p_head;
-	LIST* new_list = new LIST;
-	new_list = initList();
-	while (root != NULL) {
-		if (root->data != key) {
-			addTail(new_list, root->data);
-		}
-		root = root->p_next;
-	}
-	removeAll(list);
-	return new_list;
-}
-
-//void removeKey(LIST* list, int key) {
+//LIST* removeKey(LIST* list, int key) {
 //	NODE* root = list->p_head;
 //	LIST* new_list = new LIST;
 //	new_list = initList();
@@ -216,8 +202,22 @@ LIST* removeKey(LIST* list, int key) {
 //		root = root->p_next;
 //	}
 //	removeAll(list);
-//	list = new_list;
+//	return new_list;
 //}
+
+void removeKey(LIST* &list, int key) {
+	NODE* root = list->p_head;
+	LIST* new_list = new LIST;
+	new_list = initList();
+	while (root != NULL) {
+		if (root->data != key) {
+			addTail(new_list, root->data);
+		}
+		root = root->p_next;
+	}
+	removeAll(list);
+	list = new_list;
+}
 
 void printList(NODE* root) {
 	while (root != NULL) {
@@ -303,7 +303,7 @@ int main() {
 			printList(list->p_head);
 		}
 		if (key == 11) {
-			list = removeKey(list, 2);
+			removeKey(list, 2);
 			printList(list->p_head);
 		}
 		cout << "Input key: " << endl;

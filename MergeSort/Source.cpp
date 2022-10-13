@@ -8,7 +8,8 @@ void merge(int arr[], int l, int m, int r)
     int n2 = r - m;
 
     /* Tạo các mảng tạm */
-    int L[100], R[100];
+    //int L[100], R[100];
+    auto* L = new int[100], * R = new int[100];
 
     /* Copy dữ liệu sang các mảng tạm */
     for (i = 0; i < n1; i++)
@@ -50,6 +51,8 @@ void merge(int arr[], int l, int m, int r)
         j++;
         k++;
     }
+    delete[] L;
+    delete[] R;
 }
 
 /* l là chỉ số trái và r là chỉ số phải của mảng cần được sắp xếp */

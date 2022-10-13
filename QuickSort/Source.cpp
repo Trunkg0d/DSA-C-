@@ -2,51 +2,37 @@
 #include <iostream>
 using namespace std;
 
-int partition(int a[], int start, int end) {
-	int pivot = a[start];
-	int count = 0;
-	for (int i = start+1; i <= end; i++) {
-		if (a[i] <= pivot) {
-			count += 1;
-		}
-	}
-	int pivotIndex = start + count;
-	swap(a[pivotIndex], a[start]);
-
-	int i = start, j = end;
-	while (i<pivotIndex && j>pivotIndex) {
-		while (a[i] <= pivot) {
+int partition(int arr[], int low, int high, int pivot) {
+	int i = low;
+	int j = low;
+	while (i <= high) {
+		if (arr[i] > pivot) {
 			i++;
 		}
-		while (a[j] > pivot) {
-			j--;
-		}
-		while (i<pivotIndex && j>pivotIndex) {
-			swap(a[i], a[j]);
+		else {
+			swap(arr[i], arr[j]);
 			i++;
 			j++;
 		}
 	}
-	return pivotIndex;
+	return j - 1;
 }
 
-void quickSort(int arr[], int start, int end)
-{
-
-	// base case
-	if (start >= end)
-		return;
-
-	// partitioning the array
-	int p = partition(arr, start, end);
-
-	// Sorting the left part
-	quickSort(arr, start, p - 1);
-
-	// Sorting the right part
-	quickSort(arr, p + 1, end);
+void print(int a[], int n) {
+	for (int i = 0; i < n; i++) {
+		cout << a[i] << " ";
+	}
 }
 
+void quickSort(int arr[], int low, int high) {
+	if (low < high) {
+		int pivot = arr[high];
+		int pos = partition(arr, low, high, pivot);
+
+		quickSort(arr, low, pos - 1);
+		quickSort(arr, pos + 1, high);
+	}
+}
 int main()
 {
 
