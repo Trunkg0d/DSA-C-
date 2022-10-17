@@ -13,6 +13,15 @@ Node* createNode(int value) {
 	return p;
 }
 
+void AddFirst(Node*& pHead, Node* p) {
+	if (pHead == NULL) {
+		pHead = p;
+	}
+	else {
+		p->pNext = pHead;
+	}
+}
+
 void AddLast(Node*& pHead, Node* p) {
 	if (pHead == NULL) {
 		pHead = p;
@@ -60,6 +69,11 @@ void RemoveLast(Node*& pHead) {
 	delete p;
 }
 
+void RemoveFirst(Node*& pHead) {
+	Node* p = PickFirst(pHead);
+	delete p;
+}
+
 void Remove(Node*& pHead, int value) {
 	if (pHead != NULL) {
 		if (pHead->data == value) {
@@ -67,6 +81,41 @@ void Remove(Node*& pHead, int value) {
 		}
 		else {
 			Remove(pHead->pNext, value);
+		}
+	}
+}
+
+void PrintList(Node*& pHead) {
+	if (pHead != NULL) {
+		cout << pHead->data << " ";
+		PrintList(pHead->pNext);
+	}
+}
+
+void PrintReverseList(Node* pHead) {
+	if (pHead != NULL) {
+		PrintReverseList(pHead->pNext);
+		cout << pHead->data << " ";
+	}
+}
+
+void RemoveList(Node* pHead) {
+	while (pHead != NULL) {
+		Node* p = pHead;
+		pHead = pHead->pNext;
+		delete p;
+	}
+}
+
+//Huy tat ca phan tu co gia tri trung voi gia tri duoc cho truoc
+void RemoveAll(Node*& pHead, int value) {
+	if (pHead != NULL) {
+		if (pHead->data == value) {
+			RemoveFirst(pHead);
+			RemoveAll(pHead, value);
+		}
+		else {
+			RemoveAll(pHead->pNext, value);
 		}
 	}
 }

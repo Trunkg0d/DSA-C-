@@ -1,4 +1,2 @@
 ﻿  Source.cpp
-D:\D Data\code\C++\DSA\test\Source.cpp(52,6): warning C4101: 'i': unreferenced local variable
-D:\D Data\code\C++\DSA\test\Source.cpp(52,9): warning C4101: 'n': unreferenced local variable
   test.vcxproj -> D:\D Data\code\C++\DSA\x64\Debug\test.exe
