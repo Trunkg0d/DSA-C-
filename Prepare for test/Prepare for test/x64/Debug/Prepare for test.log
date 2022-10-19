@@ -1,0 +1,6 @@
+﻿  Source.cpp
+D:\D Data\code\C++\DSA\Prepare for test\Prepare for test\Source.cpp(22,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\D Data\code\C++\DSA\Prepare for test\Prepare for test\Source.cpp(26,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\D Data\code\C++\DSA\Prepare for test\Prepare for test\Source.cpp(30,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\D Data\code\C++\DSA\Prepare for test\Prepare for test\Source.cpp(34,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Prepare for test.vcxproj -> D:\D Data\code\C++\DSA\Prepare for test\x64\Debug\Prepare for test.exe
