@@ -1,2 +1,2 @@
 ﻿  Source.cpp
-  HLAB1.vcxproj -> D:\D Data\code\C++\DSA\21120157\Code\x64\Debug\HLAB1.exe
+LINK : fatal error LNK1104: cannot open file 'D:\D Data\code\C++\DSA\21120157\Code\x64\Debug\HLAB1.exe'
