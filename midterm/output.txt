@@ -1,0 +1,12 @@
+M00014, Nguyen Hoi Duc Minh, 0, 5, 6, 11, FAIL
+M00005, Hong Hieu Doanh, 5, 8, 3, 16, FAIL
+M00001, Tran Dao Bao Tran, 7, 8, 4, 19, FAIL
+M00006, Phan Nha Thu, 6, 4, 10, 20, FAIL
+M00007, Hong Trien Hoang, 3, 10, 10, 23, FAIL
+M00012, Dang Bui Gia Huy, 7, 6, 9, 22, PASS
+M00003, Nguyen Thanh Thao, 5, 10, 7, 22, PASS
+M00004, Nguyen Ngoc Bao Tran, 7, 9, 7, 23, PASS
+M00010, Ngo Tran Linh Dan, 10, 9, 5, 24, PASS
+M00002, Nguyen Thanh Ngoc, 8, 9, 9, 26, PASS
+M00015, Nguyen Hoi Truong Vinh, 9, 7, 10, 26, PASS
+M00009, Truong Huynh Phuc Thao, 9, 10, 8, 27, PASS

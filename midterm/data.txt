@@ -1,0 +1,16 @@
+StudentID,Full name,Math,Physics,English
+M00001,Tran Dao Bao Tran,7,8,4
+M00002,Nguyen Thanh Ngoc,8,9,9
+M00003,Nguyen Thanh Thao,5,10,7
+M00004,Nguyen Ngoc Bao Tran,7,9,7
+M00005,Hong Hieu Doanh,5,8,3
+M00006,Phan Nha Thu,6,4,10
+M00007,Hong Trien Hoang,3,10,10
+M000089,Pham Truong Thinh,8,10,7
+M00009,Truong Huynh Phuc Thao,9,10,8
+M00010,Ngo Tran Linh Dan,10,9,5
+M00011,Huynh Pham Gia Han, ,-7,4
+M00012,Dang Bui Gia Huy,7,6,9
+M00013,Luu Nguyen Phuoc Toan,9,6,-1
+M00014,Nguyen Hoi Duc Minh,0,5,6
+M00015,Nguyen Hoi Truong Vinh,9,7,10
