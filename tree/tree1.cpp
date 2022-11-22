@@ -105,15 +105,36 @@ NODE* Search(NODE* pRoot, int x){
 }
 
 void Insert(NODE* &pRoot, int x){
-    if (x > pRoot->key && pRoot->p_right == NULL){
-        pRoot->p_right = createNode(x);
-    } else if (x > pRoot->key){
-        Insert(pRoot->p_right, x);
+    NODE* new_node = createNode(x);
+    if(pRoot != NULL){
+        if (x == pRoot->key){
+        return;
+        } 
+        if(x < pRoot->key){
+            Insert(pRoot->p_left, x);
+        } else {
+            Insert(pRoot->p_right, x);
+        }
+    } else {
+        pRoot = new_node;
     }
-    if (x < pRoot->key && pRoot->p_left == NULL){
-        pRoot->p_left = createNode(x);
-    } else if (x < pRoot->key){
-        Insert(pRoot->p_left, x);
+}
+
+void Remove(NODE* &pRoot, int x){
+    NODE* index = new NODE;
+    if(pRoot != NULL){
+        if (x == pRoot->key){
+        return;
+        } 
+        if(x < pRoot->key){
+            index = pRoot;
+            Insert(pRoot->p_left, x);
+        } else {
+            index = pRoot;
+            Insert(pRoot->p_right, x);
+        }
+    } else {
+        
     }
 }
 
@@ -144,5 +165,8 @@ int main(){
     LevelOrder(root);
     cout << endl;
     Search(root, 9);
+    Insert(root, 7);
+    NLR(root);
+    cout << endl;
     return 0;
 }
