@@ -53,6 +53,12 @@ void outputCompanyList(vector<Company> vect) {
     }
 }
 
+long long specialPow(long long i){
+    long long p = 31;
+    long long m = (long long)pow(10, 9) + 9;
+    return (long long)((p%m),i)%m;
+}
+
 long long HashString(string company_name) {
     string cut = "";
     if (company_name.length() <= 20) {
@@ -64,10 +70,11 @@ long long HashString(string company_name) {
         }
     }
     long long sum = 0;
+    long long before = 0;
     for (int i = 0; i < cut.length(); i++) {
-        sum += cut[i];
+        sum += (long long)cut[i] * specialPow(i);
     }
-    return sum % 50000;
+    return sum % (long long)(pow(10, 9) + 9);
 }
 
 struct CompanyNode {
@@ -149,8 +156,15 @@ CompanyNode* Search(CompanyNode** HashTable, string company_name) {
 int main() {
     vector<Company> vect;
     vect = ReadCompanyList("MST.txt");
+    // for(int i=0;i<vect.size();i++) {
+    //     cout << vect[i].name << endl;
+    //     cout << HashString(vect[i].name) << endl;
+    //     cout << endl;
+    // }
     CompanyNode** HashTable = CreateHashTable(vect);
     CompanyNode* c = Search(HashTable, "CONG TY TNHH BEE VIET NAM");
     cout << c->company.name << endl;
+    CompanyNode* t = Search(HashTable, "CONG TY TNHH DICH VU VA PHAT TRIEN THUONG MAI KIM LONG");
+    cout << t->company.name << endl;
     return 0;
 }
