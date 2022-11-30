@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#define ll long long int
 using namespace std;
 
 struct Company {
@@ -53,10 +54,23 @@ void outputCompanyList(vector<Company> vect) {
     }
 }
 
-long long specialPow(long long i){
-    long long p = 31;
-    long long m = (long long)pow(10, 9) + 9;
-    return (long long)((p%m),i)%m;
+long long specialPow(long long i)
+{
+    long long res = 1; // Initialize result
+    long long m = pow(10, 9) + 9;
+    long long p =31;
+    // Update p if it is more than or equal to m
+    p = p % m;
+ 
+    while (i > 0) {
+        // If i is odd, multiply p with the result
+        if (i & 1)
+            res = (res * p) % m;
+        // i must be even now
+        i = i >> 1; // i = i/2
+        p = (p * p) % m;
+    }
+    return res;
 }
 
 long long HashString(string company_name) {
@@ -69,12 +83,15 @@ long long HashString(string company_name) {
             cut += company_name[i];
         }
     }
-    long long sum = 0;
+    long long res = 0;
     long long before = 0;
-    for (int i = 0; i < cut.length(); i++) {
-        sum += (long long)cut[i] * specialPow(i);
+    long long m = (pow(10, 9) + 9);
+    before = ((cut[0]%m) * specialPow(0))%m;
+    for (int i = 1; i < cut.length(); i++) {
+        long long temp = (long long)(cut[i]%m) * specialPow(i);
+        before = (before%m + temp) % m;
     }
-    return sum % (long long)(pow(10, 9) + 9);
+    return before;
 }
 
 struct CompanyNode {
@@ -166,5 +183,7 @@ int main() {
     cout << c->company.name << endl;
     CompanyNode* t = Search(HashTable, "CONG TY TNHH DICH VU VA PHAT TRIEN THUONG MAI KIM LONG");
     cout << t->company.name << endl;
+    cout << HashString("CONG TY TNHH DICH VU VA PHAT TRIEN THUONG MAI KIM LONG") << endl;
+    cout << specialPow(19);
     return 0;
 }
