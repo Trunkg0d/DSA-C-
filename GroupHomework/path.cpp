@@ -5,7 +5,7 @@
 #include<math.h>
 
 using namespace std;
-const int SIZE = 200;
+#define SIZE 200
 
 string printSymbol(string pathInput, string path) {
     /*
