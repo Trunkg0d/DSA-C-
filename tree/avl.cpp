@@ -206,7 +206,7 @@ NODE* Remove(NODE* &root, int x){
       return leftRotate(root); 
 
   // Right Left Case 
-  if (balance < -1 && getBalance(root->p_right) > 0) 
+  if (balance < -1 && getBalance(root->p_right) >= 0) 
   { 
       root->p_right = rightRotate(root->p_right); 
       return leftRotate(root); 
