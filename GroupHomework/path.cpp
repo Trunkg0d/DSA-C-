@@ -91,14 +91,6 @@ void function1(string pathInput, vector<string> data) {
     }
 }
 
-//int hashString(string fileName) {
-//    int sumCharacter = 0;
-//    for (int i = 0; i < fileName.length(); i++) {
-//        sumCharacter += fileName[i];
-//    }
-//    return (sumCharacter - 'a');
-//}
-
 long long specialPow(long long i)
 {
     long long res = 1; // Initialize result
@@ -153,7 +145,7 @@ NODE* createNode(string filePath) {
 
 NODE** createHashTable(vector<string> data) {
     NODE** hashTable = new NODE*[SIZE];
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 200; i++) {
         hashTable[i] = NULL;
     }
 

@@ -135,9 +135,14 @@ NODE* MaxLeft(NODE* root){
 }
 
 NODE* Remove(NODE* &root, int x){
-  if(root == NULL){
+  if(Search(root, x) == NULL){
     return NULL;
   }
+
+  if(root == NULL){
+    return root;
+  }
+
   if(x < root->key){
     root->p_left = Remove(root->p_left, x);
   } else if (x > root->key){
@@ -146,22 +151,21 @@ NODE* Remove(NODE* &root, int x){
     if(root->p_left == NULL && root->p_right == NULL){
       return NULL;
     } 
-    else if(root->p_left == NULL){
-      NODE* temp = root->p_right;
-      free(root);
-      return temp;
-    } else if(root->p_right == NULL){
+    else if(root->p_right == NULL){
       NODE* temp = root->p_left;
       free(root);
       return temp;
     }
+    else if(root->p_left == NULL){
+      NODE* temp = root->p_right;
+      free(root);
+      return temp;
+    }
 
-    // Node has two child
     NODE* temp = MinRight(root->p_right);
     root->key = temp->key;
     root->p_right = Remove(root->p_right, temp->key);
   }
-  return root;
 }
 
 int countNode(NODE* root){

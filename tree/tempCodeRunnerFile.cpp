@@ -1,1 +1,0 @@
-  node->height = 1;
