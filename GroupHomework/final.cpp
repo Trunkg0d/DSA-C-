@@ -46,6 +46,7 @@ void readData(string path, vector<string> &data, vector<string> &dataFile)
     if (directory == NULL)
     {
         cout << "Not found directory" << endl;
+        data.push_back("error");
         return;
     }
 
@@ -70,7 +71,7 @@ void readData(string path, vector<string> &data, vector<string> &dataFile)
     }
 }
 
-void function1(string pathInput, vector<string> data)
+void printData(string pathInput, vector<string> data)
 {
 
     for (int i = 0; i < data.size(); i++)
@@ -204,12 +205,6 @@ void moveFile(string filePath, string destination)
     return;
 }
 
-void deleteFolder(string path)
-{
-    filesystem::remove(path);
-    return;
-}
-
 string getLowercase(string path)
 {
     string tmp = path.substr(path.rfind('/') + 1);
@@ -232,58 +227,62 @@ void createLowercaseVector(vector<string> a, vector<string> &lowercase)
     return;
 }
 
-void merge(vector<string> &a, vector<string> &lowerCase, int l, int m, int r)
+void merge(vector<string> &filePath, vector<string> &fileName, vector<string> &fileNameLowercase, int l, int m, int r)
 {
     int i = l, j = m + 1;
     string tmp1[20005];
     string tmp2[20005];
+    string tmp3[20005];
     for (int k = l; k <= r; ++k)
     {
         if (i > m)
         {
-            tmp1[k] = a[j];
-            tmp2[k] = lowerCase[j++];
+            tmp1[k] = filePath[j];
+            tmp2[k] = fileName[j];
+            tmp3[k] = fileNameLowercase[j++];
         }
         else if (j > r)
         {
-            tmp1[k] = a[i];
-            tmp2[k] = lowerCase[i++];
+            tmp1[k] = filePath[i];
+            tmp2[k] = fileName[i];
+            tmp3[k] = fileNameLowercase[i++];
         }
-        else if (lowerCase[i] < lowerCase[j])
+        else if (fileName[i] < fileName[j])
         {
-            tmp1[k] = a[i];
-            tmp2[k] = lowerCase[i++];
+            tmp1[k] = filePath[i];
+            tmp2[k] = fileName[i];
+            tmp3[k] = fileNameLowercase[i++];
         }
         else
         {
-            tmp1[k] = a[j];
-            tmp2[k] = lowerCase[j++];
+            tmp1[k] = filePath[j];
+            tmp2[k] = fileName[j];
+            tmp3[k] = fileNameLowercase[j++];
         }
     }
     for (int k = l; k <= r; ++k)
     {
-        a[k] = tmp1[k];
-        lowerCase[k] = tmp2[k];
+        filePath[k] = tmp1[k];
+        fileName[k] = tmp2[k];
+        fileNameLowercase[k] = tmp3[k];
     }
     return;
 }
 
-void mergeSort(vector<string> &a, vector<string> &lowercase, int l, int r)
+void mergeSort(vector<string> &filePath, vector<string> &fileName, vector<string> &fileNameLowercase, int l, int r)
 {
     if (l >= r)
         return;
     for (int i = l; i < r; ++i)
-        if (lowercase[i] > lowercase[i + 1])
+        if (fileNameLowercase[i] > fileNameLowercase[i + 1])
         {
             int m = (l + r) / 2;
-            mergeSort(a, lowercase, l, m);
-            mergeSort(a, lowercase, m + 1, r);
-            merge(a, lowercase, l, m, r);
+            mergeSort(filePath, fileName, fileNameLowercase, l, m);
+            mergeSort(filePath, fileName, fileNameLowercase, m + 1, r);
+            merge(filePath, fileName, fileNameLowercase, l, m, r);
             break;
         }
     return;
-    // a: aBcdEf, hiHI | lowercase: abcdef, hihi
-    // lowercase array is needed to improve performance
 }
 
 void deleteEmptyFolders(string path)
@@ -300,11 +299,13 @@ void deleteEmptyFolders(string path)
     while (((entry = readdir(directory))))
     {
         if (entry->d_type == DT_DIR && (entry->d_name[0] != '.'))
+        // check if entry is a folder (not a file)
         {
             tempPath = path + "/" + entry->d_name;
             if (strcmp(entry->d_name, "OrderedFolder"))
                 emptyPath.push_back(tempPath);
-        } // find remaining subfolders
+            // prevent deleting OrderedFolder
+        }
     }
     for (int i = 0; i < emptyPath.size(); ++i)
         filesystem::remove_all(emptyPath[i]);
@@ -338,19 +339,17 @@ void renameFile(string &path, string &file, int num)
     // file: tiki.taka -> tiki9.taka (num = 9)
 }
 
-void organize(string s, vector<string> d, vector<string> name, string currentPath)
+void organize(string s, vector<string> filePath, vector<string> fileNameLowercase, string currentPath)
 {
     vector<string> hash[72];
     int len = s.length();
     bool check[36];
     // if s=ABC, check[25]=TRUE means there is a file named ABCZ.xyz
 
-    for (int i = 0; i < d.size(); ++i)
+    for (int i = 0; i < filePath.size(); ++i)
     {
-        // given a directory P->PB->PBC, pb.xyz must be in PB (not PBC)
-
-        char c = name[i][len];
-        // get i-th character of name
+        char c = fileNameLowercase[i][len];
+        // get i-th character of fileNameLowercase
 
         int index = int(c - 'a');
         if ('0' <= c && c <= '9')
@@ -358,16 +357,16 @@ void organize(string s, vector<string> d, vector<string> name, string currentPat
         if ('A' <= c && c <= 'Z')
             index = int(c - 'A');
         // a = A = 0, b = B = 1,...z = Z = 25, '0'=26, '1'=27,...,'9'=35
-        if (name[i].length() == len) // given a directory P->PB->PBC, pb.xyz must be in PB (not PBC)
+        if (fileNameLowercase[i].length() == len) // given a directory P->PB->PBC, pb.xyz must be in PB (not PBC)
         {
             check[index] = true;
-            string destination = createDirectory(s, currentPath) + d[i].substr(d[i].rfind('/') + 1);
-            moveFile(d[i], destination);
+            string destination = createDirectory(s, currentPath) + filePath[i].substr(filePath[i].rfind('/') + 1);
+            moveFile(filePath[i], destination);
         }
         else
         {
-            hash[index].push_back(d[i]);
-            hash[index + 36].push_back(name[i]);
+            hash[index].push_back(filePath[i]);
+            hash[index + 36].push_back(fileNameLowercase[i]);
             // hash[1]: D:/HAHA/tiki.taka, hash[1+36]: tiki.taka
         }
     }
@@ -382,9 +381,14 @@ void organize(string s, vector<string> d, vector<string> name, string currentPat
         else if (hash[i].size() > 0)
         {
             string path = createDirectory(s + c, currentPath);
+            // currentPath: D:/HAHA; s: "AB", c:'C'
+            // path: D:/HAHA/OrderedFolder/AB/ABC/
             for (int j = 0; j < hash[i].size(); ++j)
             {
                 string destination = path + hash[i][j].substr(hash[i][j].rfind('/') + 1);
+                // hash[i][j]: "D:/folder/tiki.txt"
+                // destination: D:/HAHA/OrderedFolder/A/AB/ABC/tiki.txt
+
                 moveFile(hash[i][j], destination);
             }
         }
@@ -393,10 +397,14 @@ void organize(string s, vector<string> d, vector<string> name, string currentPat
 
 void organizeFolder(string path)
 {
-    vector<string> all, filePath, fileName, tmp, fileNameLower;
+    vector<string> all, filePath, fileName, fileNameLowercase;
     readData(path, all, filePath);
     // all: folder + files (D:/HAHA, D:/HAHA/tiki.taka)
     // filePath: files only (D:/tiki.taka)
+    
+    if (all[0] == "error") {
+        return;
+    }
 
     string s = "";
     for (int i = 0; i < filePath.size(); ++i)
@@ -404,22 +412,18 @@ void organizeFolder(string path)
         string file = filePath[i].substr(filePath[i].rfind('/') + 1);
         string name = file.substr(0, file.find_last_of('.'));
         fileName.push_back(name);
-        fileNameLower.push_back(getLowercase(name));
+        fileNameLowercase.push_back(getLowercase(name));
     }
     // filePath: D:/HAHA/TiKi.taka
     // fileName: TiKi.taka
-    // fileNameLower: tiki.taka
 
-    tmp = fileNameLower;
-    mergeSort(filePath, fileNameLower, 0, filePath.size() - 1);
-    fileNameLower = tmp;
-    mergeSort(fileName, fileNameLower, 0, filePath.size() - 1);
+    mergeSort(filePath, fileName, fileNameLowercase, 0, filePath.size() - 1);
 
-    string prev = fileName[0];
+    string prev = fileNameLowercase[0];
     int cnt = 1;
     for (int i = 1; i < fileName.size(); ++i)
     {
-        if (fileName[i] == prev)
+        if (fileNameLowercase[i] == prev)
         {
             ++cnt;
             if (cnt == 2)
@@ -429,7 +433,7 @@ void organizeFolder(string path)
         else
         {
             cnt = 1;
-            prev = fileName[i];
+            prev = fileNameLowercase[i];
         }
     }
     // add sequence number if there is duplication
@@ -441,20 +445,24 @@ void organizeFolder(string path)
     filePath.clear();
 
     readData(path, all, filePath); // read current directory after the changes
-    function1(path, all);          // print current directory
+    printData(path, all);          // print current directory
 
     return;
 }
 
 int main()
 {
-    string pathInput = "D:/COLLEGE/COMP";
-    //    cout << "pathInput: ";
-    //    getline(cin, pathInput);
+    string pathInput;
+    cout << "pathInput: ";
+    getline(cin, pathInput);
 
     vector<string> data;
     vector<string> dataFile;
     readData(pathInput, data, dataFile);
+    
+    if (data[0] == "error") {
+        return 0;
+    }
 
     int choice;
     cout << "1. Chuc nang 1" << endl;
@@ -471,7 +479,7 @@ int main()
         if (choice == 1)
         {
             cout << endl;
-            function1(pathInput, data);
+            printData(pathInput, data);
         }
 
         if (choice == 2)

@@ -12,9 +12,9 @@ bool bfs_visited[1000];
 void dfs(int u){
   cout << u << " ";
   dfs_visited[u] = true;
-  for(int x : adj[u]){
-    if(!dfs_visited[x]){
-      dfs(x);
+  for(int v : adj[u]){
+    if(!dfs_visited[v]){
+      dfs(v);
     }
   }
 }

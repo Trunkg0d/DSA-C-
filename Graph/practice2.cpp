@@ -8,11 +8,10 @@ struct canh{
   int x, y, w;
 };
 
-int n, m;
 vector<pair<int, int>> adj[1000];
-bool used[1000];
-
 int parent[1000], d[1000];
+bool used[1000];
+int n, m;
 
 void nhap(){
   cin >> n >> m;
@@ -28,28 +27,30 @@ void nhap(){
 
 void prim(int u){
   priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> Q;
-  vector<canh> MST;
   int res = 0;
+  vector<canh> MST;
   Q.push({0, u});
+
   while(!Q.empty()){
     pair<int, int> top = Q.top();
     Q.pop();
+
     int dinh = top.second, trongso = top.first;
 
-    if(used[dinh] == true) continue;
-    res += trongso;
+    if(used[dinh]) continue;
     used[dinh] = true;
+    res += trongso;
+
     if(u != dinh){
       MST.push_back({dinh, parent[dinh], trongso});
     }
 
-    // Duyet tat ca cac dinh ke voi dinh vua pop ra
     for(auto it : adj[dinh]){
       int y = it.first, w = it.second;
       if(!used[y] && w < d[y]){
-        Q.push({w, y});
         d[y] = w;
         parent[y] = dinh;
+        Q.push({w, y});
       }
     }
   }
@@ -58,6 +59,7 @@ void prim(int u){
     cout << it.x << " " << it.y << " " << it.w << endl;
   }
 }
+
 
 int main(){
   nhap();
