@@ -190,8 +190,26 @@ NODE* Remove(NODE* &root, int x){
   return root;
 }
 
+void createTree(NODE* &root, int a[100], int &n){
+  cout << "Input n: " << endl;
+  cin >> n;
+  for(int i = 0; i < n; i++){
+    cin >> a[i];
+  }
+  for(int i = 0; i < n; i++){
+    Insert(root, a[i]);
+  }
+}
+
+void NLR(NODE* root){
+  if(root){
+    cout << "Key: " << root->key << ", height: " << root->height << endl;
+    NLR(root->p_left);
+    NLR(root->p_right);
+  }
+}
+
 int main(){
-    NODE *root = NULL;
   //            30
   //        /        \
   //      20          40
@@ -199,12 +217,9 @@ int main(){
   //   10    25           50
   //  /
   // 5
-  Insert(root, 10);
-  Insert(root, 20);
-  Insert(root, 30);
-  Insert(root, 40);
-  Insert(root, 50);
-  Insert(root, 25);
-  Insert(root, 5);
+  int n, a[100];
+  NODE* root = NULL;
+  createTree(root, a, n);
+  NLR(root);
   return 0;
 }

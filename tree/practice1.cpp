@@ -230,10 +230,10 @@ bool isBST(NODE* root){
   if(root == NULL){
     return true;
   } 
-  if(root->p_right != NULL && (root)->key < root->key){
+  if(root->p_right != NULL && MinRight(root->p_right)->key < root->key){
     return false;
   }
-  if(root->p_left != NULL && (root)->key > root->key){
+  if(root->p_left != NULL && MaxLeft(root->p_left)->key > root->key){
     return false;
   }
   if(!isBST(root->p_left) && !isBST(root->p_right)){
@@ -252,10 +252,10 @@ bool isFullBST(NODE* root){
   if(root->p_left != NULL && root->p_right == NULL){
     return false;
   }
-  if(root->p_right != NULL && (root)->key < root->key){
+  if(root->p_right != NULL && MinRight(root->p_right)->key < root->key){
     return false;
   }
-  if(root->p_left != NULL && (root)->key > root->key){
+  if(root->p_left != NULL && MaxLeft(root->p_left)->key > root->key){
     return false;
   }
   if(!isFullBST(root->p_left) && !isFullBST(root->p_right)){
@@ -305,13 +305,3 @@ int main(){
   // cout << "Check Full BST: " << isFullBST(root) << endl;
   removeTree(root);
 }
-// 4
-// 7
-// 2
-// 8
-// 1
-// 9
-// 3
-// 5
-// 0
-// 6

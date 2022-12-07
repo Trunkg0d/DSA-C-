@@ -29,17 +29,16 @@ void prim(int u){
   priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> Q;
   int res = 0;
   vector<canh> MST;
+
   Q.push({0, u});
-
+  
   while(!Q.empty()){
-    pair<int, int> top = Q.top();
-    Q.pop();
-
+    pair<int, int> top = Q.top(); Q.pop();
     int dinh = top.second, trongso = top.first;
 
     if(used[dinh]) continue;
-    used[dinh] = true;
     res += trongso;
+    used[dinh] = true;
 
     if(u != dinh){
       MST.push_back({dinh, parent[dinh], trongso});
@@ -47,10 +46,10 @@ void prim(int u){
 
     for(auto it : adj[dinh]){
       int y = it.first, w = it.second;
-      if(!used[y] && w < d[y]){
+      if(!used[y] && w<d[y]){
+        Q.push({w, y});
         d[y] = w;
         parent[y] = dinh;
-        Q.push({w, y});
       }
     }
   }

@@ -49,7 +49,7 @@ bool isPath(int start, int end){
       }
     }
   }
-  return false;  
+  return false;
 }
 
 int count_ccp(){

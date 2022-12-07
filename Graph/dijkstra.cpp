@@ -4,8 +4,6 @@
 
 using namespace std;
 
-using ll = long long;
-
 const int maxn = 100001;
 int n, m, s, t;
 vector<pair<int, int>> adj[maxn];
@@ -24,7 +22,7 @@ int pre[maxn];
 
 void dijkstra(int s){
     //Mang luu khoang cach duong di
-    vector<ll> d(n + 1, INF);
+    vector<long long> d(n + 1, INF);
     d[s] = 0;
     priority_queue<pair<int, int>, vector<pair<int, int>> , greater<pair<int,int>>> Q;
     //{khoang cach, dinh}
