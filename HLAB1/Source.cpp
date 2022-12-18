@@ -12,7 +12,7 @@ void output(int a[], int n) {
 	cout << endl;
 }
 
-// SELECTION SORT
+// SELECTION SORT **
 void SelectionSort(int a[], int n) {
 	for (int i = 0; i < n; i++) {
 		int min_pos = i;
@@ -22,9 +22,7 @@ void SelectionSort(int a[], int n) {
 			}
 		}
 		if (a[min_pos] < a[i]) {
-			int temp = a[i];
-			a[i] = a[min_pos];
-			a[min_pos] = temp;
+			swap(a[i], a[min_pos]);
 		}
 	}
 }
@@ -70,7 +68,7 @@ void ShellSort(int arr[], int n)
 	}
 }
 
-// HEAP SORT
+// HEAP SORT **
 void Heapify(int a[], int n, int i) {
 	int parent = i;
 	int leftchild = 2 * i + 1;
@@ -98,7 +96,7 @@ void HeapSort(int a[], int n) {
 	}
 }
 
-// MERGE SORT
+// MERGE SORT **
 void Merge(int arr[], int l, int m, int r)
 {
 	int i, j, k;
@@ -162,7 +160,7 @@ void MergeSort(int a[], int left, int right) {
 	}
 }
 
-// QUICK SORT
+// QUICK SORT **
 void QuickSort(int arr[], int left, int right) {
 	int pivot = left + (right - left) / 2;
 	int i = left;
@@ -184,7 +182,7 @@ void QuickSort(int arr[], int left, int right) {
 		QuickSort(arr, left, j);
 }
 
-// RADIX SORT
+// RADIX SORT **
 void RadixSort(int* a, int n)
 {
 	int i, m = a[0], exp = 1;
