@@ -234,25 +234,25 @@ void LevelOrder(NODE* root){
   }
 }
 
-bool isAVL(NODE* root){
-  if(root == NULL){
-    return true;
-  }
-  if(getBalance(root) > 1 || getBalance(root) < -1){
-    return false;
-  } else {
-    if (root->p_left != NULL && MaxLeft(root->p_left) > root->key){
-      return false;
-    }
-    if(root->p_right != NULL && MaxRight(root->p_left) < root->key){
-      return false;
-    }
-    if(!isAVL(root->p_left) && !isAVL(root->p_right)){
-      return false;
-    }
-    return true;
-  } 
-}
+// bool isAVL(NODE* root){
+//   if(root == NULL){
+//     return true;
+//   }
+//   if(getBalance(root) > 1 || getBalance(root) < -1){
+//     return false;
+//   } else {
+//     if (root->p_left != NULL && MaxLeft(root->p_left) > root->key){
+//       return false;
+//     }
+//     if(root->p_right != NULL && MaxRight(root->p_left) < root->key){
+//       return false;
+//     }
+//     if(!isAVL(root->p_left) && !isAVL(root->p_right)){
+//       return false;
+//     }
+//     return true;
+//   } 
+// }
 
 int main(){
   NODE *root = NULL;
