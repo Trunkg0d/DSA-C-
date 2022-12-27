@@ -154,6 +154,18 @@ NODE* minRight(NODE* root){
   return NULL;
 }
 
+NODE* maxLeft(NODE* root){
+  if(root == NULL){
+    return root;
+  }
+  if(root->p_right == NULL){
+    return root;
+  } else {
+    return maxLeft(root->p_right);
+  }
+  return NULL;
+}
+
 NODE* Remove(NODE* &root, int x){
   NODE* target = Search(root, x);
   if(target == NULL){
@@ -178,9 +190,9 @@ NODE* Remove(NODE* &root, int x){
       return temp;
     }
     // node with two child
-    NODE* temp = minRight(root->p_right);
+    NODE* temp = maxLeft(root->p_left);
     root->key = temp->key;
-    root->p_right = Remove(root->p_right, temp->key);
+    root->p_left = Remove(root->p_left, temp->key);
   }
   if(root == NULL){
     return root;
@@ -263,16 +275,16 @@ int main(){
   //   10    25           50
   //  /
   // 5
-  Insert(root, 10);
-  Insert(root, 20);
-  Insert(root, 30);
-  Insert(root, 40);
-  Insert(root, 50);
-  Insert(root, 25);
-  Insert(root, 5);
+  Insert(root, 100);
+  Insert(root, 70);
+  Insert(root, 150);
+  Insert(root, 90);
+  Insert(root, 120);
+  Insert(root, 180);
+  Insert(root, 130);
   NLR(root);
   cout << endl;
-  root = Remove(root, 40);
+  root = Remove(root, 100);
   NLR(root);
   cout << endl;
   LevelOrder(root);
